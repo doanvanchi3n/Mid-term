@@ -1,0 +1,8 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // CRUD đi qua callable Functions đã xác thực custom claim admin.
+    // Không đưa password hash xuống client qua Firestore trực tiếp.
+    match /{document=**} { allow read, write: if false; }
+  }
+}
